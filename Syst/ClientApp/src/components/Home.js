@@ -14,6 +14,12 @@ export class Home extends Component {
     }
 
     static renderEventsTable(events) {
+
+        const selectEventRow = (id) => {
+            const { history } = this.props;
+            history.push(`/eventdetail/'${id}`);
+        }
+        
         return (
             <table className='table table-striped' aria-labelledby="tabelLabel">
                 <thead>
@@ -28,9 +34,9 @@ export class Home extends Component {
                 </thead>
                 <tbody>
                 {events.map(event =>
-                    <tr key={event.id}>
+                    <tr onClick={() => selectEventRow(event.id)}>
                         <td>
-                            <a href={'/eventdetail/' + event.id}> {event.id} </a>
+                            {event.id}
                         </td>
                         <td>{event.name}</td>
                         <td>{event.date}</td>
@@ -66,7 +72,7 @@ export class Home extends Component {
         const { history } = this.props;
         history.push("/CreateEvent");
     }
-
+    
     async populateData() {
         const response = await fetch('api/eventsquery/upcoming');
         const data = await response.json();
