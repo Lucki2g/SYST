@@ -9,13 +9,16 @@ export class CreateQuestion extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            inputValues: [{Representation: "", Answer: "", Options: "", imageUrl: ""}]
+            Representation: "",
+            Answer: "",
+            inputValues: [{OptionName: ""}],
+            ImageUrl: ""
         };
     }
 
     addOptionFields() {
         this.setState(({
-            inputValues: [...this.state.inputValues, {Answer: "", Options: ""}]
+            inputValues: [...this.state.inputValues, {OptionName:""}]
         }))
     }
 
@@ -27,11 +30,10 @@ export class CreateQuestion extends Component {
 
     render() {
 
-        const options = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "Æ", "Ø", "Å"];
-        const defaultOption = options[0];
+        const letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "Æ", "Ø", "Å"];
 
         return (
-            <div class="CreateQPage">
+            <div className="CreateQPage">
                 <h2>Here you can create a question </h2>
                 <br/>
                 <form>
@@ -45,10 +47,10 @@ export class CreateQuestion extends Component {
                     {this.state.inputValues.map((answer, index) =>
                         <div key={index}>
                             <label>
-                                <h5>Option {options[index]}</h5>
+                                <h5>Option {letters[index]}</h5>
                                 <label>Correct answer?</label>
-                                <input type = "radio" name="correctAnswer" onClick={(event) => this.state.answer = event.target.value}/>
-                            <input className= "input-field" onChange={(event) => this.state.Options[index] = event.target.value} />
+                                <input type = "radio" name="correctAnswer"/>
+                            <input className= "input-field" onChange={(event) => this.state.inputValues.OptionName = event.target.value } />
                             </label>
                         </div>
                         )}
@@ -69,10 +71,10 @@ export class CreateQuestion extends Component {
 
     rerouteToCreateEvent = () => {
         let event = {
-            "representation": this.state.Representation,
-            "answer": this.state.Answer,
-            "Options": this.state.Options,
-            "imageUrl": this.state.imageUrl
+            "representation": this.state.inputValues.Representation,
+            "answer": this.state.inputValues.Answer,
+            "Options": this.state.inputValues.Options,
+            "imageUrl": this.state.inputValues.imageUrl
         };
         console.log(event);
         const requestOptions = {
