@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css'
 
 
@@ -49,7 +48,7 @@ export class CreateQuestion extends Component {
                             <label>
                                 <h5>Option {letters[index]}</h5>
                                 <label>Correct answer?</label>
-                                <input type = "radio" name="correctAnswer"/>
+                                <input type = "radio" name="correctAnswer" onChange={this.state.answer = letter[index]}/>
                             <input className= "input-field" onChange={(event) => this.state.inputValues.OptionName = event.target.value } />
                             </label>
                         </div>
