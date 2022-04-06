@@ -48,7 +48,7 @@ export class CreateQuestion extends Component {
                             <label>
                                 <h5>Option {letters[index]}</h5>
                                 <label>Correct answer?</label>
-                                <input type = "radio" name="correctAnswer" onChange={this.state.answer = letter[index]}/>
+                                <input type = "radio" name="correctAnswer" onChange={this.state.answer = letters[index]}/>
                             <input className= "input-field" onChange={(event) => this.state.inputValues.OptionName = event.target.value } />
                             </label>
                         </div>
