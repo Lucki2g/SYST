@@ -85,6 +85,55 @@ public class AdminRepositoryTests
     }
 
     [Fact]
+
+    public async void ReadNameFromId_returns_admin_Lukas_when_given_id_2()
+    {
+        //Act
+        var actual = await _repo.ReadNameFromId(2);
+
+        //Assert
+        Assert.Equal(Status.Found, actual.Item1);
+        Assert.Equal("Lukas", actual.Item2);
+    }
+
+    [Fact]
+    public async void ReadNameFromID_returns_Status_notFound_when_given_non_existing_id()
+    {
+        //Act
+        var actual = await _repo.ReadNameFromId(60);
+
+        //Assert
+        Assert.Equal(Status.NotFound, actual.Item1);
+        Assert.Equal(null, actual.Item2);
+    }
+
+    [Fact]
+
+    public async void Read_returns_Admin_Røde_when_given_id_1()
+    {
+        //Act
+        var actual = await _repo.Read(1);
+
+        //Assert
+        Assert.Equal(Status.Found, actual.Item1);
+        Assert.Equal(admin1.Name, actual.Item2.Name);
+        Assert.Equal(admin1.Email, actual.Item2.Email);
+        Assert.Equal(admin1.Name, actual.Item2.Name);
+    }
+
+    [Fact]
+    public async void Read_returns_Status_notfound_when_giving_non_existing_id()
+    {
+        //act
+        var actual = await _repo.Read(420);
+        
+        //assert
+        Assert.Equal(Status.NotFound, actual.Item1);
+        Assert.Equal(default(AdminDTO), actual.Item2);
+      
+    }
+
+    [Fact]
     public async void Update_Updates_Admin_In_Repository()
     {
         //Arrange
