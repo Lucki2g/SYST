@@ -95,6 +95,7 @@ namespace Infrastructure
             return Status.Updated;
         }
 
+        //Updates if an candidate is upvoted in the system
         public async Task<Status> UpdateUpVote(int id)
         {
             var c = await _context.Candidates.Where(c => c.Id == id).FirstOrDefaultAsync();
@@ -119,6 +120,8 @@ namespace Infrastructure
             return Status.Deleted;
         }
 
+        //Adds the chosen answer from a quiz to the candidate
+        //NEEDS TESTING
         public async Task<Status> AddAnswer(int candidateId, AnswerDTO answer) {
             var c = await _context.Candidates.Include(c => c.Answers).Include(c => c.EventsParticipatedIn).Where(c => c.Id == candidateId).FirstOrDefaultAsync();
             

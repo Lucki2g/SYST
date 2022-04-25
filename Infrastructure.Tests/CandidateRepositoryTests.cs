@@ -179,6 +179,16 @@ public class CandidateRepositoryTests{
         Assert.Equal(Status.Updated, actual);
     }
 
+    [Fact]
+
+    public async void UpdateUpvote_updates_a_candidate_to_upvoted()
+    {
+        //Act
+        var actual = await _repo.UpdateUpVote(1);
+
+        //Assert
+        Assert.Equal(Status.Updated, actual);
+    }
 
     [Fact]
     public async void Delete_deletes_candidates_with_id_1()
